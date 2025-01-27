@@ -1041,3 +1041,23 @@ WHERE customers.name = %(name_1)s
  * Running on http://127.0.0.1:5000
 2025-01-27 10:58:19 - INFO - [33mPress CTRL+C to quit[0m
 2025-01-27 10:58:23 - INFO - 127.0.0.1 - - [27/Jan/2025 10:58:23] "[31m[1mPOST /api/books HTTP/1.1[0m" 422 -
+2025-01-27 11:51:17 - INFO - Flask application is starting
+2025-01-27 11:51:17 - WARNING - This is a warning
+2025-01-27 11:51:17 - ERROR - An error occurred while processing
+2025-01-27 11:51:17 - INFO - Flask application is starting
+2025-01-27 11:51:17 - WARNING - This is a warning
+2025-01-27 11:51:17 - ERROR - An error occurred while processing
+2025-01-27 11:51:17 - INFO - Flask application is starting
+2025-01-27 11:51:17 - WARNING - This is a warning
+2025-01-27 11:51:17 - ERROR - An error occurred while processing
+2025-01-27 11:51:17 - INFO - Flask application is starting
+2025-01-27 11:51:17 - WARNING - This is a warning
+2025-01-27 11:51:17 - ERROR - An error occurred while processing
+2025-01-27 11:51:17 - INFO - Flask application is starting
+2025-01-27 11:51:17 - WARNING - This is a warning
+2025-01-27 11:51:17 - ERROR - An error occurred while processing
+2025-01-27 11:51:17 - INFO - Starting Flask application
+2025-01-27 11:51:17 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-01-27 11:51:17 - INFO - [33mPress CTRL+C to quit[0m
+2025-01-27 11:51:23 - INFO - 127.0.0.1 - - [27/Jan/2025 11:51:23] "[31m[1mPOST /api/books HTTP/1.1[0m" 422 -

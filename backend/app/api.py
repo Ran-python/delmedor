@@ -3,12 +3,13 @@ import flask
 import app
 from app.LibModels import db, Book, LoanType, Customer, Loan, MyLoan, BookAvailability, User
 from app.logger import log_info, log_error, log_warning, log_debug
-from flask_jwt_extended import jwt_required, get_jwt_identity
+#from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.businesslayer import app as business_app
 
 app = (flask)
 BusinessLayer = business_app
 
+current_user = User
 
 # Initialize Blueprint for API routes
 api_bp = Blueprint('api', __name__)
@@ -25,7 +26,7 @@ log_error("An error occurred while processing")
 
 def check_customer_role():
     """Helper function to check if the current user is a customer."""
-    current_user = get_jwt_identity()
+    #current_user = get_jwt_identity()
     if current_user['role'] != 'customer':
         log_error(f"Unauthorized access attempt by {current_user['username']}")
         return jsonify({"error": "Unauthorized access"}), 403
@@ -36,16 +37,13 @@ def check_customer_role():
 # ------------------------------------------------------------
 
 @api_bp.route('/books/available', methods=['GET'])
-@jwt_required()
+#@jwt_required()
 def get_available_books():
     """
     Endpoint to get the list of available books.
     Accessible only to customers.
     """
-    current_user = check_customer_role()
-    if isinstance(current_user, dict):  # if an error response, return it
-        return current_user
-
+    
     books = BookAvailability.query.all()
     book_list = [
         {
@@ -57,16 +55,16 @@ def get_available_books():
             "availability_status": book.availability_status
         } for book in books
     ]
-    log_info(f"Customer {current_user['username']} accessed available books")
+    log_info(f"Customer, accessed available books")
     return jsonify(book_list), 200
 
 @api_bp.route('/my-loans', methods=['GET'])
-@jwt_required()
+#@jwt_required()
 def get_my_loans():
     """
     Endpoint for customers to view their own loans.
     """
-    current_user = check_customer_role()
+    #current_user = check_customer_role()
     if isinstance(current_user, dict):
         return current_user
 
@@ -93,7 +91,7 @@ class BookAPI:
     """Handles CRUD operations for books."""
 
 @api_bp.route('/books', methods=['POST', 'GET'])
-@jwt_required()
+#@jwt_required()
 def handle_books():
     try:
         if request.method == 'POST':
@@ -118,13 +116,13 @@ def handle_books():
 # ------------------------------------------------------------
 
 @api_bp.route('/admin', methods=['GET'])
-@jwt_required()
+#@jwt_required()
 def admin_dashboard():
     """
     Endpoint for the admin dashboard.
     Accessible only to librarians.
     """
-    current_user = get_jwt_identity()
+    #current_user = get_jwt_identity()
     if current_user['role'] != 'librarian':
         log_error(f"Unauthorized access attempt by {current_user['username']} to admin dashboard")
         return jsonify({"error": "Access forbidden"}), 403
@@ -135,12 +133,12 @@ def admin_dashboard():
 # ------------------------------------------------------------
 
 @api_bp.route('/user-data', methods=['GET'])
-@jwt_required()
+#@jwt_required()
 def user_dashboard():
     """
     Endpoint for users to view their dashboard.
     """
-    current_user = get_jwt_identity()
+    #current_user = get_jwt_identity()
     return jsonify({"message": f"Welcome {current_user['username']}!"})
 
 
